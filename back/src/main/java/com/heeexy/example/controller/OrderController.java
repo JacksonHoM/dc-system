@@ -1,9 +1,12 @@
 package com.heeexy.example.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.heeexy.example.service.OrderService;
+import com.heeexy.example.util.constants.Constants;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
@@ -11,6 +14,18 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @GetMapping("/loadOrderList")
+    public JSONObject loadOrders(){
+        Session session = SecurityUtils.getSubject().getSession();
+        JSONObject userInfo = (JSONObject) session.getAttribute(Constants.SESSION_USER_INFO);
+        String username = userInfo.getString("username");
+        return orderService.loadOrders(username);
+    }
+
+    @PostMapping("/updatePayType")
+    public JSONObject updatePayType(@RequestBody JSONObject requestJson){
+        return orderService.updatePayType(requestJson);
+    }
 
 
 }

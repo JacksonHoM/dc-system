@@ -10,6 +10,10 @@ import lombok.experimental.Accessors;
 @TableName("dc_order")
 @Accessors(chain = true)
 public class Order extends BasePojo{
+
+    private OrderUser orderUser;
+    private  OrderItem orderItem;
+
     @TableId
     private Integer orderId;
 
