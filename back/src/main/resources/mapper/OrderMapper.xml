@@ -5,12 +5,7 @@
 
 
     <update id="updatePayType">
-        update dc_order set order_paytype=#{orderPayType} where order_num = #{orderNum}
+        update dc_order set order_paytype=#{orderPayType} where order_id = #{orderId}
     </update>
-    <select id="findorderuserByUsername" resultType="com.heeexy.example.pojo.OrderUser">
-        select * from dc_order_userinfo where user_name = #{username}
-    </select>
-    <select id="findorderitemByotId" resultType="com.heeexy.example.pojo.OrderItem">
-        select * from dc_order_iteminfo where user_item = #{orderItemId}
-    </select>
+
 </mapper>

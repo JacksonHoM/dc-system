@@ -9,10 +9,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface OrderDao extends BaseMapper<Order> {
 
-    int updatePayType(@Param("orderNum") String orderNum, @Param("orderPayType") String orderPayType);
+    int updatePayType(@Param("orderId") Integer orderId, @Param("orderPayType") String orderPayType);
 
-
-    OrderUser findorderuserByUsername(@Param("username") String username);
-
-    OrderItem findorderitemByotId(@Param("orderItemId") Integer orderItemId);
 }

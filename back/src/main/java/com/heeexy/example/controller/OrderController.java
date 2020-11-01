@@ -22,9 +22,22 @@ public class OrderController {
         return orderService.loadOrders(username);
     }
 
-    @PostMapping("/updatePayType")
+   /* @PostMapping("/updatePayType")
     public JSONObject updatePayType(@RequestBody JSONObject requestJson){
         return orderService.updatePayType(requestJson);
+    }*/
+
+    @PostMapping("/submitOrder")
+    public JSONObject submitOrder(@RequestBody JSONObject requestJson){
+        Session session = SecurityUtils.getSubject().getSession();
+        JSONObject userInfo = (JSONObject) session.getAttribute(Constants.SESSION_USER_INFO);
+        String username = userInfo.getString("username");
+        return orderService.submitOrder(requestJson,username);
+    }
+
+    @PostMapping("/updateItemNum")
+    public JSONObject updateItemNum(@RequestBody JSONObject requestJson){
+        return orderService.updateItemNum(requestJson);
     }
 
 
